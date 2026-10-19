@@ -271,9 +271,9 @@ private fun ViniloScreen(
         Spacer(Modifier.height(10.dp))
 
         if (!permissionGranted) {
-            EmptyLibrary("Dale permiso a Vinilo para encontrar la música de tu teléfono.", "Dar permiso", onRequestPermission)
+            EmptyLibrary("Dale permiso a Vinilo para encontrar la música de tu teléfono.", "Dar permiso", onRequestPermission, modifier = Modifier.fillMaxWidth().weight(1f))
         } else if (songs.isEmpty()) {
-            EmptyLibrary("Todavía no encontramos canciones locales. Añade archivos de audio al teléfono y vuelve a intentarlo.", "Volver a cargar", onRequestPermission)
+            EmptyLibrary("Todavía no encontramos canciones locales. Añade archivos de audio al teléfono y vuelve a intentarlo.", "Volver a cargar", onRequestPermission, modifier = Modifier.fillMaxWidth().weight(1f))
         } else if (filtered.isEmpty()) {
             Box(Modifier.fillMaxWidth().weight(1f), contentAlignment = Alignment.Center) {
                 Text("No encontramos coincidencias.", color = SoftText)
@@ -334,7 +334,7 @@ private fun PlayerPanel(
                 Spacer(Modifier.width(22.dp))
                 Surface(color = Coral, shape = CircleShape, modifier = Modifier.size(54.dp).clickable(onClick = onToggle)) {
                     Box(contentAlignment = Alignment.Center) {
-                        Icon(if (isPlaying) Icons.Filled.Pause else Icons.Filled.PlayArrow, contentDescription = if (isPlaying) "Pausar" else "Reproducir", tint = Night, modifier = Modifier.size(32.dp))
+                        Icon(if (isPlaying) Icons.Filled.Pause else Icons.Filled.PlayArrow, contentDescription = if (isPlaying) "Pausar" else "Reproducir", tint = Night, modifier = Modifier.size(36.dp))
                     }
                 }
                 Spacer(Modifier.width(22.dp))
@@ -369,8 +369,8 @@ private fun VinylDisc(isPlaying: Boolean, size: Int) {
 }
 
 @Composable
-private fun EmptyLibrary(message: String, buttonText: String, onClick: () -> Unit) {
-    Column(Modifier.fillMaxWidth().weight(1f), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+private fun EmptyLibrary(message: String, buttonText: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Column(modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         VinylDisc(isPlaying = false, size = 94)
         Spacer(Modifier.height(18.dp))
         Text(message, color = SoftText, fontSize = 13.sp, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
